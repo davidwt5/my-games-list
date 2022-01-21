@@ -1,14 +1,22 @@
-import Title from "./Title";
+// import Title from "./Title";
+// import User from "./User";
+
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import MainNav from "./MainNav";
 import User from "./User";
-import NavBar from "./NavBar";
 
 function Header() {
   return (
-    <div className="header">
-      <Title />
-      <User />
-      <NavBar />
-    </div>
+    <header>
+      <Navbar bg="light">
+        <Container>
+          <Navbar.Brand href="/">MyGamesList</Navbar.Brand>
+          <MainNav />
+          <User />
+        </Container>
+      </Navbar>
+    </header>
   );
 }
 

@@ -3,7 +3,7 @@ import HomePageBody from "./components/HomePageBody"
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <Header />
       <HomePageBody />
     </div>
