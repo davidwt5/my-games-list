@@ -1,5 +1,6 @@
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { LinkContainer } from "react-router-bootstrap";
 
 function User() {
   return (
@@ -17,10 +18,14 @@ function User() {
         }
         id="user-dropdown"
       >
-        <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.1">My Games</NavDropdown.Item>
+        <LinkContainer to="/profile">
+          <NavDropdown.Item>Profile</NavDropdown.Item>
+        </LinkContainer>
+        <LinkContainer to="/mygames">
+          <NavDropdown.Item>My Games</NavDropdown.Item>
+        </LinkContainer>
         <NavDropdown.Divider />
-        <NavDropdown.Item href="#action/3.4">Sign Out</NavDropdown.Item>
+        <NavDropdown.Item onClick={() => alert("signed out")}>Sign Out</NavDropdown.Item>
       </NavDropdown>
     </Nav>
   );
