@@ -28,6 +28,7 @@ Made with react, bootstrap, and mongodb
 - Search sort options (newest, alphabetical, relevance)
 - Page system / Load more when user reaches bottom
 - Review system
+- If game card longer than 5 lines, do a ... click to expand
 
 ## Side Note
 - Requires a cors proxy server to work. This is because cors origin header is (rightfully) disabled by the API provider.

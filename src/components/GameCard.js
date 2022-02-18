@@ -1,5 +1,7 @@
 import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
+import { Plus, Minus, List } from "react-feather";
+import "./GameCard.css"
 
 // No genre as of know, figure that out later. Genre does exist on giantbomb though
 function GameCard({ game }) {
@@ -16,7 +18,11 @@ function GameCard({ game }) {
         <Card.Text>{deck}</Card.Text>
         <Card.Text>{original_release_date}</Card.Text>
       </Card.Body>
-      <Card.Footer className="text-muted">2 days ago</Card.Footer>
+      <Card.Footer className="text-muted">
+        <Plus className="card-footer-icon mx-1" onClick={() => alert("added")}/>
+        <List className="card-footer-icon mx-1" onClick={() => alert("what status")}/>
+        <Minus className="card-footer-icon mx-1" onClick={() => alert("removed")}/>
+      </Card.Footer>
     </Card>
   );
 }

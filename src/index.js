@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import Header from "./components/Header";
 import Games from "./components/Games";
-import MyGames from "./components/MyGames"
+import MyGames from "./components/MyGames";
 import Profile from "./components/Profile";
 import About from "./components/About";
 import HTTP404 from "./components/HTTP404";
