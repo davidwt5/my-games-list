@@ -5,7 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import { LinkContainer } from "react-router-bootstrap";
 import MainNav from "./MainNav";
-import User from "./User";
+import LoggedInUser from "./LoggedInUser";
 
 function Header() {
   return (
@@ -16,7 +16,7 @@ function Header() {
             <Navbar.Brand>MyGamesList</Navbar.Brand>
           </LinkContainer>
           <MainNav />
-          <User />
+          <LoggedInUser />  {/* Do a check if user is logged in to render */}
         </Container>
       </Navbar>
     </header>

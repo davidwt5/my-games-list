@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import Header from "./components/Header";
-import Games from "./components/Games";
-import MyGames from "./components/MyGames";
-import Profile from "./components/Profile";
-import About from "./components/About";
-import HTTP404 from "./components/HTTP404";
-import Search from "./components/Search";
+import Header from "./components/Header/Header";
+import Games from "./components/PageBodies/Games";
+import MyGames from "./components/PageBodies/MyGames";
+import Profile from "./components/PageBodies/Profile";
+import About from "./components/PageBodies/About";
+import HTTP404 from "./components/PageBodies/HTTP404";
+import Search from "./components/PageBodies/Search";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 

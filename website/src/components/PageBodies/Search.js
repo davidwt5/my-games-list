@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import GameCard from "./GameCard";
-import config from "../config";
+import GameCard from "../Utility/GameCard";
+import config from "../../config";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";

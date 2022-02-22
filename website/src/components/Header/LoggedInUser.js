@@ -2,7 +2,7 @@ import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { LinkContainer } from "react-router-bootstrap";
 
-function User() {
+function LoggedInUser() {
   return (
     <Nav className="ms-auto">
       <NavDropdown
@@ -31,4 +31,4 @@ function User() {
   );
 }
 
-export default User;
+export default LoggedInUser;
