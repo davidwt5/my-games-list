@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const { v4: uuidv4 } = require("uuid");
 const crypto = require("crypto");
 const User = require("./models/User");
+const config = require("./config");
 const app = express();
 const port = process.env.PORT || 4000;
 
@@ -45,5 +46,5 @@ app.listen(port, () => {
 });
 
 const url =
-  "mongodb+srv://admin:2HFu21TMxRp07uI5@cluster0.ozhyl.mongodb.net/db?retryWrites=true&w=majority";
+  `mongodb+srv://admin:${config.dbPassword}@cluster0.ozhyl.mongodb.net/db?retryWrites=true&w=majority`;
 mongoose.connect(url);
