@@ -4,8 +4,9 @@
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import { LinkContainer } from "react-router-bootstrap";
-import MainNav from "./MainNav";
+import Nav from "react-bootstrap/Nav";
 import LoggedInUser from "./LoggedInUser";
+import LoggedOutUser from "./LoggedOutUser";
 
 function Header() {
   return (
@@ -15,8 +16,15 @@ function Header() {
           <LinkContainer to="/">
             <Navbar.Brand>MyGamesList</Navbar.Brand>
           </LinkContainer>
-          <MainNav />
-          <LoggedInUser />  {/* Do a check if user is logged in to render */}
+          <Nav className="me-auto">
+            <Nav.Item>
+              <Nav.Link href="/games">Games</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href="/about">About</Nav.Link>
+            </Nav.Item>
+          </Nav>
+          <LoggedOutUser /> {/* Do a check if user is logged in to render */}
         </Container>
       </Navbar>
     </header>
