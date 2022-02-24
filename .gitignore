@@ -27,3 +27,4 @@ config.*
 ignore
 node_modules
 todo.txt
+dbtest.js
