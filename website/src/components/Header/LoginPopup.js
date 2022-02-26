@@ -20,6 +20,7 @@ function LoginPopup({ show, handleClose }) {
           email: email,
           password: password,
         }),
+        credentials: "include" // Security risk?
       });
       if(response.status !== 200) {
         console.log("ERROR: " + response.status);
