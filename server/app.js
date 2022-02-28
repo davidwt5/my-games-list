@@ -13,7 +13,7 @@ const port = process.env.PORT || 4000;
 app.use(
   cors({
     origin: "http://localhost:3000",
-    credentials: true
+    credentials: true,
   })
 );
 
@@ -43,8 +43,13 @@ app.post("/login", (req, res) => {
         user.sessionId = uuidv4();
         await user.save();
       }
-      res.cookie("sessionId", user.sessionId);
-      res.json({ sessionId: user.sessionId });
+      res.cookie("sessionId", user.sessionId); // Register sessionId in the browser cookies. Secure? HTTP Only? Expiry?
+      // Give basic user data instead, can render stuff with it!
+      res.json({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        profilePic: user.profilePic,
+      });
     }
   })();
 });

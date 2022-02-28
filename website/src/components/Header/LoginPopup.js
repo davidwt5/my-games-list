@@ -20,7 +20,7 @@ function LoginPopup({ show, handleClose }) {
           email: email,
           password: password,
         }),
-        credentials: "include" // Security risk?
+        credentials: "include" // Security risk? Need this so the browser sends cookies.
       });
       if(response.status !== 200) {
         console.log("ERROR: " + response.status);

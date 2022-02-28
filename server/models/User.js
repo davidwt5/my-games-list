@@ -7,7 +7,17 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
+    required: [true, "password is required"]
   },
+  firstName: {
+    type: String,
+    required: [true, "first name is required"]
+  },
+  lastName: {
+    type: String,
+    required: [true, "last name is required"]
+  },
+  profilePic: String,
   sessionId: String
 });
 
