@@ -19,10 +19,14 @@ function Header() {
           </LinkContainer>
           <Nav className="me-auto">
             <Nav.Item>
-              <Nav.Link href="/games">Games</Nav.Link>
+              <LinkContainer to="/games">
+                <Nav.Link href="#">Games</Nav.Link>
+              </LinkContainer>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link href="/about">About</Nav.Link>
+              <LinkContainer to="/about">
+                <Nav.Link href="#">About</Nav.Link>
+              </LinkContainer>
             </Nav.Item>
             <Button
               variant="primary"
