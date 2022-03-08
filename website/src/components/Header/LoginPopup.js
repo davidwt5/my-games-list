@@ -25,8 +25,7 @@ function LoginPopup({ show, handleClose }) {
       if(response.status !== 200) {
         console.log("ERROR: " + response.status);
       } else {
-        const result = await response.json();
-        console.log(result);
+        window.location.reload();
       }
     } catch (e) {
       console.log(e);
