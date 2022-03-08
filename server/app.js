@@ -43,13 +43,13 @@ app.post("/login", (req, res) => {
         user.sessionId = uuidv4();
         await user.save();
       }
-      res.cookie("sessionId", user.sessionId); // Register sessionId in the browser cookies. Secure? HTTP Only? Expiry?
-      // Give basic user data instead, can render stuff with it!
-      res.json({
-        firstName: user.firstName,
-        lastName: user.lastName,
-        profilePic: user.profilePic,
-      });
+      // Register sessionId in the browser cookies. Secure? HTTP Only? Expiry?
+      // Is it vulnerable to cross site cookies, but its not really sensitive information right?
+      // Basic information stored in cookies to avoid db look up for common insensitive information
+      res.cookie("sessionId", user.sessionId);
+      res.cookie("firstName", user.firstName);
+      if (user.profilePic) res.cookie("profilePic", user.profilePic);
+      res.sendStatus(200);
     }
   })();
 });
