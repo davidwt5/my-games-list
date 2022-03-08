@@ -1,15 +1,13 @@
-// import Title from "./Title";
-// import User from "./User";
-
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
 import { LinkContainer } from "react-router-bootstrap";
 import Nav from "react-bootstrap/Nav";
+import getCookiesInObjFormat from "../Utility/cookies";
 import LoggedInUser from "./LoggedInUser";
 import LoggedOutUser from "./LoggedOutUser";
 
 function Header() {
+  const userCookies = getCookiesInObjFormat();
   return (
     <header>
       <Navbar bg="light">
@@ -28,18 +26,12 @@ function Header() {
                 <Nav.Link href="#">About</Nav.Link>
               </LinkContainer>
             </Nav.Item>
-            <Button
-              variant="primary"
-              onClick={() =>
-                fetch("http://localhost:4000/cookietest", {
-                  credentials: "include", // Security flaw?
-                })
-              }
-            >
-              test cookies
-            </Button>
           </Nav>
-          <LoggedOutUser /> {/* Do a check if user is logged in to render */}
+          {userCookies ? (
+            <LoggedInUser user={userCookies} />
+          ) : (
+            <LoggedOutUser />
+          )}
         </Container>
       </Navbar>
     </header>
