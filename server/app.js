@@ -47,7 +47,7 @@ app.post("/login", (req, res) => {
       // Is it vulnerable to cross site cookies, but its not really sensitive information right?
       // Basic information stored in cookies to avoid db look up for common insensitive information
       res.cookie("sessionId", user.sessionId);
-      res.cookie("firstName", user.firstName);
+      res.cookie("username", user.username);
       if (user.profilePic) res.cookie("profilePic", user.profilePic);
       res.sendStatus(200);
     }

@@ -3,7 +3,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { LinkContainer } from "react-router-bootstrap";
 
 function LoggedInUser({ user }) {
-  const { firstName, profilePic } = user;
+  const { username, profilePic } = user;
   function logoutHandler() {
     function deleteCookies() {
       var allCookies = document.cookie.split(";");
@@ -29,7 +29,7 @@ function LoggedInUser({ user }) {
               alt="user pic"
               style={{ height: 50, marginRight: 10 }}
             />
-            {firstName}
+            {username}
           </div>
         }
         id="user-dropdown"
