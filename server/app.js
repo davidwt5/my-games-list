@@ -54,6 +54,24 @@ app.post("/login", (req, res) => {
   })();
 });
 
+app.post("/signup", (req, res) => {
+  const { email, username, password } = req.body;
+  const hashedPassword = crypto
+    .createHash("sha256")
+    .update(password)
+    .digest("hex");
+  (async () => {
+    // Inserting new user to db
+    const user = new User({ email, username, password: hashedPassword });
+    user.sessionId = uuidv4();
+    await user.save();
+    // Setting up session
+    res.cookie("sessionId", user.sessionId);
+    res.cookie("username", user.username);
+    res.sendStatus(200);
+  })();
+});
+
 app.get("/cookietest", (req, res) => {
   console.log(req.cookies);
   req.cookies ? res.send("Cookies Received") : res.send("No Cookies");
