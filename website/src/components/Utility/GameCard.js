@@ -15,7 +15,7 @@ function GameCard({ game }) {
         style={{ aspectRatio: "4/5" }}
       ></Image>
       <Card.Body>
-        <Card.Text>{deck}</Card.Text>
+        <Card.Text className="text-truncate">{deck}</Card.Text>
         <Card.Text>{original_release_date}</Card.Text>
       </Card.Body>
       <Card.Footer className="text-muted">
