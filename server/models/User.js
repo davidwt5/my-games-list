@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
+const usersGameEntry = require("./UsersGameEntry");
 
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
+    unique: true,
     required: [true, "email is required"],
   },
   password: {
@@ -11,10 +13,17 @@ const userSchema = new mongoose.Schema({
   },
   username: {
     type: String,
+    unique: true,
     required: [true, "username is required"]
   },
+  sessionId: {
+    type: String,
+    unique: true
+  },
+  gamesList: {
+    type: [usersGameEntry.schema]
+  },
   profilePic: String,
-  sessionId: String
 });
 
 module.exports = mongoose.model("User", userSchema);

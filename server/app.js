@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const { v4: uuidv4 } = require("uuid");
 const crypto = require("crypto");
 const User = require("./models/User");
+const UsersGameEntry = require("./models/UsersGameEntry");
 const cookieParser = require("cookie-parser");
 const config = require("./config");
 const app = express();
@@ -20,7 +21,13 @@ app.use(
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+// Returns a user on success. Returns null otherwise.
+async function authenticate(sessionId, username) {
+  return await User.findOne({ sessionId, username });
+}
+
 // Returns a randomly generated Sesssion ID upon login
+// Regenerate sessionID if one is already in use (db returns error if sessionID is not unique)
 app.post("/login", (req, res) => {
   const hashedPassword = crypto
     .createHash("sha256")
@@ -54,6 +61,8 @@ app.post("/login", (req, res) => {
   })();
 });
 
+// DB returns error if email and/or username is not unique. Fix it.
+// Regenerate UUID if sessionID is already in use (just like login)
 app.post("/signup", (req, res) => {
   const { email, username, password } = req.body;
   const hashedPassword = crypto
@@ -72,10 +81,40 @@ app.post("/signup", (req, res) => {
   })();
 });
 
+// Support default status if not supplied
+// Ignore adding multiple times
+app.post("/addgame", (req, res) => {
+  (async () => {
+    const { sessionId, username } = req.cookies;
+    const user = await authenticate(sessionId, username);
+    if (!user) {
+      res.status(403).send("Bad Credentials");
+      return;
+    }
+
+    const gameEntry = new UsersGameEntry({
+      gameId: req.body.gameId,
+      status: "plan to play",
+    });
+    // Ignores the request to add if said game already exists in the list
+    if (user.gamesList.find((entry) => entry.id === gameEntry.id)) {
+      res.sendStatus(200);
+      return;
+    }
+    user.gamesList.push(gameEntry);
+    await user.save();
+    res.sendStatus(200);
+  })();
+});
+
 app.get("/cookietest", (req, res) => {
   console.log(req.cookies);
   req.cookies ? res.send("Cookies Received") : res.send("No Cookies");
 });
+
+// app.get("/usertest/:id", (req, res) => {
+//   (async () => console.log(await User.findById(req.params.id)))();
+// });
 
 app.listen(port, () => {
   console.log(`app listening on port ${port}`);

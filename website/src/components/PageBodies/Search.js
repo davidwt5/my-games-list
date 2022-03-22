@@ -22,6 +22,7 @@ function Search() {
   }
 
   useEffect(() => {
+    // Should go through backend instead of hitting API directly
     async function searchGames(title = "", offset = 0) {
       if (title.length < 3) {
         return Promise.reject(
