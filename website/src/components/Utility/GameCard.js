@@ -3,7 +3,6 @@ import Image from "react-bootstrap/Image";
 import { Plus, Minus, List } from "react-feather";
 import "./GameCard.css";
 
-// Consider a heart and unheart system instead
 async function addGame(e) {
   const gameId = e.target.dataset.id;
   const addGameURL = "http://localhost:4000/addgame";
@@ -28,7 +27,28 @@ async function addGame(e) {
   }
 }
 
-// No genre as of know, figure that out later. Genre does exist on giantbomb though
+async function removeGame(e) {
+  const gameId = e.target.dataset.id;
+  const addGameURL = `http://localhost:4000/removegame/${gameId}`;
+  try {
+    const response = await fetch(addGameURL, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include", // Security risk? Need this so the browser sends cookies.
+    });
+    if (response.status !== 200) {
+      console.log("ERROR: " + response.status);
+    } else {
+      alert("successfully removed game");
+    }
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+// Consider a heart and unheart system instead
 function GameCard({ game }) {
   const { id, name, image, deck, original_release_date } = game;
   return (
@@ -44,17 +64,17 @@ function GameCard({ game }) {
         <Card.Text>{original_release_date}</Card.Text>
       </Card.Body>
       <Card.Footer className="text-muted">
-        <Plus data-id={id}
+        <Plus data-id={id} stroke-width={1.5}
           className="card-footer-icon mx-1"
           onClick={addGame}
         />
-        <List data-id={id}
+        <List data-id={id} stroke-width={1.5}
           className="card-footer-icon mx-1"
           onClick={() => alert("what status")}
         />
-        <Minus data-id={id}
+        <Minus data-id={id} stroke-width={1.5}
           className="card-footer-icon mx-1"
-          onClick={() => alert("removed")}
+          onClick={removeGame}
         />
       </Card.Footer>
     </Card>

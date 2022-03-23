@@ -92,16 +92,39 @@ app.post("/addgame", (req, res) => {
       return;
     }
 
+    // Sometimes req.body would be empty here, causing an error... I don't know why??
     const gameEntry = new UsersGameEntry({
       gameId: req.body.gameId,
       status: "plan to play",
     });
+
     // Ignores the request to add if said game already exists in the list
-    if (user.gamesList.find((entry) => entry.id === gameEntry.id)) {
+    if (user.gamesList.find((entry) => entry.gameId === gameEntry.gameId)) {
+      console.log("duplicate game");
       res.sendStatus(200);
       return;
     }
     user.gamesList.push(gameEntry);
+    await user.save();
+    res.sendStatus(200);
+  })();
+});
+
+// If the game to be deleted can't be found, simply ignore
+app.delete("/removegame/:gameId", (req, res) => {
+  (async () => {
+    const { sessionId, username } = req.cookies;
+    const user = await authenticate(sessionId, username);
+    if (!user) {
+      res.status(403).send("Bad Credentials");
+      return;
+    }
+
+    // Find index of the game to be deleted
+    const index = user.gamesList.findIndex(
+      (entry) => entry.gameId === req.params.gameId
+    );
+    if (index > -1) user.gamesList.splice(index, 1);
     await user.save();
     res.sendStatus(200);
   })();
@@ -112,9 +135,10 @@ app.get("/cookietest", (req, res) => {
   req.cookies ? res.send("Cookies Received") : res.send("No Cookies");
 });
 
-// app.get("/usertest/:id", (req, res) => {
-//   (async () => console.log(await User.findById(req.params.id)))();
-// });
+app.get("/usertest/:id", (req, res) => {
+  (async () => console.log(await User.findById(req.params.id)))();
+  res.send("see server console");
+});
 
 app.listen(port, () => {
   console.log(`app listening on port ${port}`);
