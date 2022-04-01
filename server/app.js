@@ -7,6 +7,7 @@ const crypto = require("crypto");
 const User = require("./models/User");
 const UsersGameEntry = require("./models/UsersGameEntry");
 const cookieParser = require("cookie-parser");
+const fetch = require("node-fetch");
 const config = require("./config");
 const app = express();
 const port = process.env.PORT || 4000;
@@ -139,7 +140,31 @@ app.get("/gameslist", (req, res) => {
       return;
     }
 
-    res.json(user.gamesList);
+    const gameIds = user.gamesList.map((entry) => entry.gameId).join("|");
+    const apiKey = "380528e0d4eebe9efa820d8e3acb977037bd98ea"; //TEMPORARY UNTIL WE MIGRATE!!!
+    const url = urlGenerator({
+      domain: "https://giantbomb.com/",
+      endpoint: "api/games",
+      queryStrings: {
+        api_key: apiKey,
+        format: "json",
+        field_list: "id,name,image",
+        filter: `id:${gameIds}`,
+        offset: 0,
+        limit: 12,
+      },
+    });
+    const response = await fetch(url);
+    const result = await response.json();
+
+    // Converts the user model into a plain object, this is so we can add more fields
+    // That are not defined in the user model
+    const plainObjUser = user.toObject();
+    for (let i = 0; i < plainObjUser.gamesList.length; i++) {
+      plainObjUser.gamesList[i].game = result.results[i];
+    }
+
+    res.json(plainObjUser.gamesList);
   })();
 });
 
@@ -159,3 +184,12 @@ app.listen(port, () => {
 
 const url = `mongodb+srv://admin:${config.dbPassword}@cluster0.ozhyl.mongodb.net/db?retryWrites=true&w=majority`;
 mongoose.connect(url);
+
+function urlGenerator({ domain = "", endpoint = "", queryStrings = {} }) {
+  if (!domain) return "";
+  let url = new URL(endpoint, domain);
+  for (let key of Object.keys(queryStrings)) {
+    url.searchParams.append(key, queryStrings[key]);
+  }
+  return url;
+}

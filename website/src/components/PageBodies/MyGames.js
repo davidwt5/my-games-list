@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import GamesList from "../Utility/GamesList";
 
 function MyGames() {
@@ -14,7 +14,7 @@ function MyGames() {
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include" // Security risk? Need this so the browser sends cookies.
+        credentials: "include", // Security risk? Need this so the browser sends cookies.
       });
       const result = await response.json();
       setGamesList(result);
@@ -22,14 +22,12 @@ function MyGames() {
   }, []);
 
   // Sync the changes to the database whenever gamesList gets updated
-  useEffect(() => {
-
-  }, [gamesList]);
+  useEffect(() => {}, [gamesList]);
 
   return (
     // Return ERROR: UNAUTHORISED PAGE if no session ID
     <div className="my-games">
-      <GamesList list={gamesList} />
+      {gamesList ? <GamesList list={gamesList} /> : <p>loading</p>}
     </div>
   );
 }
