@@ -130,6 +130,19 @@ app.delete("/removegame/:gameId", (req, res) => {
   })();
 });
 
+app.get("/gameslist", (req, res) => {
+  (async () => {
+    const { sessionId, username } = req.cookies;
+    const user = await authenticate(sessionId, username);
+    if (!user) {
+      res.status(403).send("Bad Credentials");
+      return;
+    }
+
+    res.json({gamesList: user.gamesList});
+  })();
+});
+
 app.get("/cookietest", (req, res) => {
   console.log(req.cookies);
   req.cookies ? res.send("Cookies Received") : res.send("No Cookies");
