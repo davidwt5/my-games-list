@@ -139,7 +139,7 @@ app.get("/gameslist", (req, res) => {
       return;
     }
 
-    res.json({gamesList: user.gamesList});
+    res.json(user.gamesList);
   })();
 });
 
