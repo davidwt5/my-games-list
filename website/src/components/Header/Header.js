@@ -18,7 +18,7 @@ function Header() {
           <Nav className="me-auto">
             <Nav.Item>
               <LinkContainer to="/games">
-                <Nav.Link href="#">Games</Nav.Link>
+                <Nav.Link>Games</Nav.Link>
               </LinkContainer>
             </Nav.Item>
             <Nav.Item>
