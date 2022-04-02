@@ -183,7 +183,7 @@ app.listen(port, () => {
   console.log(`app listening on port ${port}`);
 });
 
-const url = `mongodb+srv://admin:${config.dbPassword}@cluster0.ozhyl.mongodb.net/db?retryWrites=true&w=majority`;
+const url = `mongodb+srv://${config.mongo.username}:${config.mongo.password}@cluster0.ozhyl.mongodb.net/db?retryWrites=true&w=majority`;
 mongoose.connect(url);
 
 function urlGenerator({ domain = "", endpoint = "", queryStrings = {} }) {
