@@ -141,12 +141,11 @@ app.get("/gameslist", (req, res) => {
     }
 
     const gameIds = user.gamesList.map((entry) => entry.gameId).join("|");
-    const apiKey = "380528e0d4eebe9efa820d8e3acb977037bd98ea"; //TEMPORARY UNTIL WE MIGRATE!!!
     const url = urlGenerator({
       domain: "https://giantbomb.com/",
       endpoint: "api/games",
       queryStrings: {
-        api_key: apiKey,
+        api_key: config.giantBomb.apiKey,
         format: "json",
         field_list: "id,name,image",
         filter: `id:${gameIds}`,
@@ -167,6 +166,10 @@ app.get("/gameslist", (req, res) => {
 
     res.json(plainObjUser.gamesList);
   })();
+});
+
+app.get("/searchgames", (req, res) => {
+
 });
 
 app.get("/cookietest", (req, res) => {
