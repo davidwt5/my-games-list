@@ -157,8 +157,9 @@ app.get("/gameslist", (req, res) => {
     const response = await fetch(url);
     const result = await response.json();
 
-    // Converts the user model into a plain object, this is so we can add more fields
-    // That are not defined in the user model
+    // Converts the user model into a plain object. This is so we can add a game data field
+    // that's fetched from giantbomb. This field isn't defined in the database model and hence
+    // We can't add it in to a model object.
     const plainObjUser = user.toObject();
     for (let i = 0; i < plainObjUser.gamesList.length; i++) {
       plainObjUser.gamesList[i].game = result.results[i];
