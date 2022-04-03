@@ -16,7 +16,7 @@ function LoggedInUser({ user }) {
     }
 
     deleteCookies();
-    window.location.reload();
+    window.location.href = '/';
   }
 
   return (

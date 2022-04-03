@@ -27,7 +27,7 @@ function SignupPopup({ show, handleClose }) {
       if(response.status !== 200) {
         console.log("ERROR: " + response.status);
       } else {
-        window.location.reload();
+        window.location.href = '/';
       }
     } catch (e) {
       console.log(e);
