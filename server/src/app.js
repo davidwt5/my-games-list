@@ -4,8 +4,9 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 const dbConnect = require("./config/dbConfig");
-const Games = require("./routes/Games");
+const Gameslist = require("./routes/Gameslist");
 const User = require("./routes/User");
+const Search = require("./routes/Search");
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -19,8 +20,9 @@ app.use(
 
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(Games);
+app.use(Gameslist);
 app.use(User);
+app.use(Search);
 
 app.listen(port, () => {
   console.log(`app listening on port ${port}`);
