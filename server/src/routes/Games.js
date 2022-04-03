@@ -4,22 +4,13 @@ const fetch = require("node-fetch");
 const config = require("../../config");
 const urlGenerator = require("../helpers/urlGenerator");
 const UsersGameEntry = require("../models/UsersGameEntry");
-
-// Returns a user on success. Returns null otherwise.
-async function authenticate(sessionId, username) {
-  return await User.findOne({ sessionId, username });
-}
+const authenticate = require("../authentication/authenticate");
 
 // Support default status if not supplied
 // Ignore adding multiple times
-router.post("/addgame", (req, res) => {
+router.post("/addgame", authenticate, (req, res) => {
   (async () => {
-    const { sessionId, username } = req.cookies;
-    const user = await authenticate(sessionId, username);
-    if (!user) {
-      res.status(403).send("Bad Credentials");
-      return;
-    }
+    const user = req.user;
 
     // Sometimes req.body would be empty here, causing an error... I don't know why??
     const gameEntry = new UsersGameEntry({
@@ -40,14 +31,9 @@ router.post("/addgame", (req, res) => {
 });
 
 // If the game to be deleted can't be found, simply ignore
-router.delete("/removegame/:gameId", (req, res) => {
+router.delete("/removegame/:gameId", authenticate, (req, res) => {
   (async () => {
-    const { sessionId, username } = req.cookies;
-    const user = await authenticate(sessionId, username);
-    if (!user) {
-      res.status(403).send("Bad Credentials");
-      return;
-    }
+    const user = req.user;
 
     // Find index of the game to be deleted
     const index = user.gamesList.findIndex(
@@ -59,14 +45,9 @@ router.delete("/removegame/:gameId", (req, res) => {
   })();
 });
 
-router.get("/gameslist", (req, res) => {
+router.get("/gameslist", authenticate, (req, res) => {
   (async () => {
-    const { sessionId, username } = req.cookies;
-    const user = await authenticate(sessionId, username);
-    if (!user) {
-      res.status(403).send("Bad Credentials");
-      return;
-    }
+    const user = req.user;
 
     const gameIds = user.gamesList.map((entry) => entry.gameId).join("|");
     const url = urlGenerator({
