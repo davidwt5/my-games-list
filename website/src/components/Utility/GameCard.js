@@ -8,7 +8,7 @@ import "./GameCard.css";
 
 async function addGame(e) {
   const gameId = e.target.dataset.id;
-  const addGameURL = "http://localhost:4000/addgame";
+  const addGameURL = "http://localhost:4000/gameslist";
   try {
     const response = await fetch(addGameURL, {
       method: "POST",
@@ -32,7 +32,7 @@ async function addGame(e) {
 
 async function removeGame(e) {
   const gameId = e.target.dataset.id;
-  const addGameURL = `http://localhost:4000/removegame/${gameId}`;
+  const addGameURL = `http://localhost:4000/gameslist/${gameId}`;
   try {
     const response = await fetch(addGameURL, {
       method: "DELETE",
