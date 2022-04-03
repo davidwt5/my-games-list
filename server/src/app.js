@@ -24,6 +24,12 @@ app.use(Gameslist);
 app.use(User);
 app.use(Search);
 
+// Very basic default error 
+app.use((err, req, res, next) => {
+  res.status(400);
+  res.json({ err });
+});
+
 app.listen(port, () => {
   console.log(`app listening on port ${port}`);
 });

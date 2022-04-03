@@ -5,8 +5,7 @@ async function authenticate(req, res, next) {
   const { sessionId, username } = req.cookies;
   const user = await User.findOne({ sessionId, username });
   if (!user) {
-    res.status(403).send("Bad Credentials");
-    return next("router");
+    return next("403 - Bad Request");
   }
 
   req.user = user;
