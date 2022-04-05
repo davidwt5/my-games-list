@@ -1,8 +1,12 @@
 import ListGroup from "react-bootstrap/ListGroup";
 
-function GamesListEntry({game}) {
+function GamesListEntry({ game }) {
   console.log(game);
-  return <p>entry</p>
+  return (
+    <div>
+      <p>{game.data.name} | {game.status}</p>
+    </div>
+  );
 }
 
 export default GamesListEntry;
