@@ -6,9 +6,11 @@ const urlGenerator = require("../helpers/urlGenerator");
 const UsersGameEntry = require("../models/UsersGameEntry");
 const authenticate = require("../authentication/authenticate");
 
+router.use(authenticate);
+
 router
   .route("/gameslist")
-  .get(authenticate, (req, res) => {
+  .get((req, res) => {
     (async () => {
       const user = req.user;
 
@@ -42,7 +44,7 @@ router
 
   // Support default status if not supplied
   // Ignore adding multiple times
-  .post(authenticate, (req, res) => {
+  .post((req, res) => {
     (async () => {
       const user = req.user;
 
@@ -65,7 +67,7 @@ router
   })
 
   // If the game to be deleted can't be found, simply ignore
-  .delete(authenticate, (req, res) => {
+  .delete((req, res) => {
     (async () => {
       const user = req.user;
 
