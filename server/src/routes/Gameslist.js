@@ -64,21 +64,21 @@ router
       await user.save();
       res.sendStatus(200);
     })();
-  })
-
-  // If the game to be deleted can't be found, simply ignore
-  .delete((req, res) => {
-    (async () => {
-      const user = req.user;
-
-      // Find index of the game to be deleted
-      const index = user.gamesList.findIndex(
-        (entry) => entry.gameId === req.params.gameId
-      );
-      if (index > -1) user.gamesList.splice(index, 1);
-      await user.save();
-      res.sendStatus(200);
-    })();
   });
+
+// If the game to be deleted can't be found, simply ignore
+router.delete("/gameslist/:id", (req, res) => {
+  (async () => {
+    const user = req.user;
+
+    // Find index of the game to be deleted
+    const index = user.gamesList.findIndex(
+      (entry) => entry.gameId === req.params.gameId
+    );
+    if (index > -1) user.gamesList.splice(index, 1);
+    await user.save();
+    res.sendStatus(200);
+  })();
+});
 
 module.exports = router;
