@@ -6,7 +6,7 @@ const urlGenerator = require("../helpers/urlGenerator");
 const UsersGameEntry = require("../models/UsersGameEntry");
 const authenticate = require("../authentication/authenticate");
 
-router.use(authenticate);
+router.use("/gameslist", authenticate);
 
 router
   .route("/gameslist")
