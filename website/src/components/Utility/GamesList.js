@@ -8,7 +8,7 @@ function GamesList({ list }) {
     <Container>
       <ListGroup>
         {list.map((game) => (
-          <GamesListEntry game={game} />
+          <GamesListEntry game={game} key={game.gameId}/>
         ))}
       </ListGroup>
     </Container>

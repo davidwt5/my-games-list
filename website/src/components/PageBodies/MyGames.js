@@ -6,6 +6,7 @@ function MyGames() {
   const [gamesList, setGamesList] = useState(undefined);
 
   // Obtains the games list for the user belonging to that sessionID (assumes logged in)
+  // Todo: fail authentication, need to redirect to error page
   useEffect(() => {
     (async () => {
       const url = "http://localhost:4000/gameslist";
