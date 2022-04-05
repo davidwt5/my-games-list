@@ -35,7 +35,7 @@ router
       // We can't add it in to a model object.
       const plainObjUser = user.toObject();
       for (let i = 0; i < plainObjUser.gamesList.length; i++) {
-        plainObjUser.gamesList[i].game = result.results[i];
+        plainObjUser.gamesList[i].data = result.results[i];
       }
 
       res.json(plainObjUser.gamesList);
