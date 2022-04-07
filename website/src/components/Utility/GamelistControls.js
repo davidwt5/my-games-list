@@ -53,28 +53,28 @@ async function removeGame(e) {
 }
 
 // Takes the id of the target game
-function GamelistControls({ id }) {
+function GamelistControls({ id, className }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
-    <div>
+    <div className={className ? className : ""}>
       <Plus
         data-id={id}
-        stroke-width={1.5}
+        strokeWidth={1.5}
         className="card-footer-icon mx-1"
         onClick={addGame}
       />
       <List
         data-id={id}
-        stroke-width={1.5}
+        strokeWidth={1.5}
         className="card-footer-icon mx-1"
         onClick={handleShow}
       />
       <Minus
         data-id={id}
-        stroke-width={1.5}
+        strokeWidth={1.5}
         className="card-footer-icon mx-1"
         onClick={removeGame}
       />
