@@ -5,8 +5,8 @@ import GamesListEntry from "./GamesListEntry";
 function GamesList({ list }) {
   return (
     // Unique Key prop
-    <Container>
-      <ListGroup>
+    <Container className="mt-5">
+      <ListGroup variant="flush">
         {list.map((game) => (
           <GamesListEntry game={game} key={game.gameId}/>
         ))}
