@@ -72,8 +72,9 @@ router.delete("/gameslist/:id", (req, res) => {
     const user = req.user;
 
     // Find index of the game to be deleted
+    // Uses == deliberately for easy casting
     const index = user.gamesList.findIndex(
-      (entry) => entry.gameId === req.params.gameId
+      (entry) => entry.gameId == req.params.id
     );
     if (index > -1) user.gamesList.splice(index, 1);
     await user.save();
