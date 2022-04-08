@@ -9,6 +9,7 @@ const authenticate = require("../authentication/authenticate");
 router.use("/gameslist", authenticate);
 
 router
+  // Gets a list of the user's game list
   .route("/gameslist")
   .get((req, res) => {
     (async () => {
@@ -49,6 +50,7 @@ router
     })();
   })
 
+  // Adds a game to the user's game list
   // Support default status if not supplied
   // Ignore adding multiple times
   .post((req, res) => {
@@ -73,6 +75,7 @@ router
     })();
   });
 
+// Delets a game from user's game list
 // If the game to be deleted can't be found, simply ignore
 router.delete("/gameslist/:id", (req, res) => {
   (async () => {
