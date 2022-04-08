@@ -27,6 +27,7 @@ router
           limit: 12,
         },
       });
+
       const response = await fetch(url);
       const result = await response.json();
 
@@ -34,6 +35,12 @@ router
       // that's fetched from giantbomb. This field isn't defined in the database model and hence
       // We can't add it in to a model object.
       const plainObjUser = user.toObject();
+
+      // The game datas returned will be sorted by id; not sorted by the id order
+      // In the filtered field, therefore we must sort before associating the two
+      plainObjUser.gamesList.sort((a, b) => a.gameId - b.gameId);
+
+      // Associating the data with each game entry
       for (let i = 0; i < plainObjUser.gamesList.length; i++) {
         plainObjUser.gamesList[i].data = result.results[i];
       }
