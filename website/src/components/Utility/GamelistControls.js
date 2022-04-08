@@ -6,12 +6,12 @@ import { useState } from "react";
 import { Plus, Minus, List } from "react-feather";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import Dropdown from "react-bootstrap/Dropdown";
 
-async function addGame(e) {
-  const gameId = e.target.dataset.id;
-  const addGameURL = "http://localhost:4000/gameslist";
+async function addGame(gameId) {
+  const url = "http://localhost:4000/gameslist";
   try {
-    const response = await fetch(addGameURL, {
+    const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,11 +31,10 @@ async function addGame(e) {
   }
 }
 
-async function removeGame(e) {
-  const gameId = e.target.dataset.id;
-  const addGameURL = `http://localhost:4000/gameslist/${gameId}`;
+async function removeGame(gameId) {
+  const url = `http://localhost:4000/gameslist/${gameId}`;
   try {
-    const response = await fetch(addGameURL, {
+    const response = await fetch(url, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -52,43 +51,112 @@ async function removeGame(e) {
   }
 }
 
+async function updateStatus(gameId, newStatus) {
+  console.log("status update request received")
+  const url = "http://localhost:4000/gameentry";
+  try {
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        gameId: gameId,
+        status: newStatus
+      }),
+      credentials: "include", // Security risk? Need this so the browser sends cookies.
+    });
+    if (response.status !== 200) {
+      console.log("ERROR: " + response.status);
+    } else {
+      alert("successfully updated status");
+    }
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 // Takes the id of the target game
-function GamelistControls({ id, className }) {
+// className prop is just for bootstrap styling purposes
+function GamelistControls({ id, status, setStatus, className }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const heartHandler = () => addGame(id);
+  const unHeartHandler = () => removeGame(id);
+
+  // Sends a request to update the game status in db upon selecting dropdown
+  const dropdownHandler = (e) => {
+    const newStatus = e.target.innerText.toLowerCase();
+    setStatus(newStatus);
+    updateStatus(id, newStatus);
+  };
+
   return (
     <div className={className ? className : ""}>
       <Plus
-        data-id={id}
         strokeWidth={1.5}
         className="card-footer-icon mx-1"
-        onClick={addGame}
+        onClick={heartHandler}
       />
       <List
-        data-id={id}
         strokeWidth={1.5}
         className="card-footer-icon mx-1"
         onClick={handleShow}
       />
       <Minus
-        data-id={id}
         strokeWidth={1.5}
         className="card-footer-icon mx-1"
-        onClick={removeGame}
+        onClick={unHeartHandler}
       />
+
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Change Status</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body className="d-flex">
+          <Dropdown>
+            <Dropdown.Toggle className="text-capitalize">
+              {status}
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item
+                className="text-capitalize"
+                onClick={dropdownHandler}
+              >
+                plan to play
+              </Dropdown.Item>
+              <Dropdown.Item
+                className="text-capitalize"
+                onClick={dropdownHandler}
+              >
+                playing
+              </Dropdown.Item>
+              <Dropdown.Item
+                className="text-capitalize"
+                onClick={dropdownHandler}
+              >
+                completed
+              </Dropdown.Item>
+              <Dropdown.Item
+                className="text-capitalize"
+                onClick={dropdownHandler}
+              >
+                on-hold
+              </Dropdown.Item>
+              <Dropdown.Item
+                className="text-capitalize"
+                onClick={dropdownHandler}
+              >
+                dropped
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
           </Button>
         </Modal.Footer>
       </Modal>
