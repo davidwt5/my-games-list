@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 
 const dbConnect = require("./config/dbConfig");
 const Gameslist = require("./routes/Gameslist");
+const GameEntry = require("./routes/GameEntry");
 const User = require("./routes/User");
 const Search = require("./routes/Search");
 
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use(Gameslist);
 app.use(User);
 app.use(Search);
+app.use(GameEntry);
 
 // Very basic default error 
 app.use((err, req, res, next) => {
