@@ -1,3 +1,5 @@
+// Page where you browse games, comes with a search bar
+
 import Container from "react-bootstrap/Container";
 import SearchBar from "../Utility/SearchBar";
 
