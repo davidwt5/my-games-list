@@ -1,5 +1,3 @@
-// Is this an unused file?
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -19,7 +17,7 @@ function Games() {
 
   return (
     <div className="games">
-      <Container>
+      <Container className="my-4 px-5">
         <h1>Games</h1>
         <Form onSubmit={searchSubmissionHandler}>
           <InputGroup className="mb-3">

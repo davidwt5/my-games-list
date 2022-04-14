@@ -52,7 +52,7 @@ function Search() {
       </Col>
     ));
     return (
-      <Container>
+      <Container className="my-4 px-5">
         <Row>{cells}</Row>
       </Container>
     );
