@@ -7,7 +7,7 @@ function GameCard({ game }) {
   const { id, name, image, deck, original_release_date } = game;
   return (
     <Card className="my-4 text-center" style={{ width: "100%" }}>
-      <Card.Header as="h5">{name}</Card.Header>
+      <Card.Header as="h5" className="text-truncate">{name}</Card.Header>
       <Image
         src={image.original_url}
         className="w-75 my-4 m-auto"
