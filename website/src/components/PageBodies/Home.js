@@ -24,7 +24,7 @@ function Home() {
             Session, etc.)
           </li>
           <li>
-            Learn to build <em>reasonably</em> good looking UI
+            Learn to build reasonably decent looking UI
           </li>
           <li>Understand how all the parts of web development fit together</li>
         </ol>
