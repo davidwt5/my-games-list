@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import GameCard from "../Utility/GameCard";
 import Loading from "../Utility/Loading";
+import Games from "./Games";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import SearchBar from "../Utility/SearchBar";
 
 function Search() {
   const [searchParams] = useSearchParams();
@@ -25,6 +27,7 @@ function Search() {
       const response = await fetch(`${url}?title=${title}`);
       return await response.json();
     }
+    setsearchResponse(null); // Resets the search response to trigger loading animation
     searchGames(searchTitle)
       .then((res) => setsearchResponse(res))
       .catch((e) => setsearchResponse(e));
@@ -33,7 +36,10 @@ function Search() {
   // Case: Loading
   if (searchResponse === null) {
     return (
-      <Loading />
+      <Container className="my-4 px-5">
+        <SearchBar />
+        <Loading />
+      </Container>
     );
   }
 
@@ -53,6 +59,7 @@ function Search() {
     ));
     return (
       <Container className="my-4 px-5">
+        <SearchBar />
         <Row>{cells}</Row>
       </Container>
     );
