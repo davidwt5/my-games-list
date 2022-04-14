@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import GameCard from "../Utility/GameCard";
 import Loading from "../Utility/Loading";
-import Games from "./Games";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
