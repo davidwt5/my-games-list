@@ -52,7 +52,7 @@ async function removeGame(gameId) {
 }
 
 async function updateStatus(gameId, newStatus) {
-  console.log("status update request received")
+  console.log("status update request received");
   const url = "http://localhost:4000/gameentry";
   try {
     const response = await fetch(url, {
@@ -62,7 +62,7 @@ async function updateStatus(gameId, newStatus) {
       },
       body: JSON.stringify({
         gameId: gameId,
-        status: newStatus
+        status: newStatus,
       }),
       credentials: "include", // Security risk? Need this so the browser sends cookies.
     });

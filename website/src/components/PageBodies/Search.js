@@ -20,7 +20,7 @@ function Search() {
           new Error("search query must be at least 3 characters long")
         );
       }
-      const url = "http://localhost:4000/searchgames"
+      const url = "http://localhost:4000/searchgames";
       const response = await fetch(`${url}?title=${title}`);
       return await response.json();
     }
