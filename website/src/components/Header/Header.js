@@ -21,11 +21,12 @@ function Header() {
                 <Nav.Link>Games</Nav.Link>
               </LinkContainer>
             </Nav.Item>
-            <Nav.Item>
+            {/* We don't need an about page atm */}
+            {/* <Nav.Item>
               <LinkContainer to="/about">
                 <Nav.Link href="#">About</Nav.Link>
               </LinkContainer>
-            </Nav.Item>
+            </Nav.Item> */}
           </Nav>
           {userCookies ? (
             <LoggedInUser user={userCookies} />
