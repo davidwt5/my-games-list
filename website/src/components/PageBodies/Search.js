@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import GameCard from "../Utility/GameCard";
+import Loading from "../Utility/Loading";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -29,12 +30,22 @@ function Search() {
       .catch((e) => setsearchResponse(e));
   }, [searchTitle]);
 
+  // Case: Loading
   if (searchResponse === null) {
-    return <p>loading</p>;
-  } else if (searchResponse instanceof Error) {
+    return (
+      <Loading />
+    );
+  }
+
+  // Case: Fetch Errors
+  else if (searchResponse instanceof Error) {
     return <p>{searchResponse.message}</p>;
-  } else {
+  }
+
+  // Case: Normal
+  else {
     console.log(searchResponse);
+    // Match each search result to a gamecard in a cell grid
     const cells = searchResponse.results.map((result) => (
       <Col xs={12} md={6} lg={4} key={result.id}>
         <GameCard game={result} />

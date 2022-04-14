@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import GamesList from "../Utility/GamesList";
+import Loading from "../Utility/Loading";
 
 function MyGames() {
   // List if gameIDs
@@ -28,7 +29,7 @@ function MyGames() {
   return (
     // Return ERROR: UNAUTHORISED PAGE if no session ID
     <div className="my-games">
-      {gamesList ? <GamesList list={gamesList} /> : <p>loading</p>}
+      {gamesList ? <GamesList list={gamesList} /> : <Loading />}
     </div>
   );
 }
