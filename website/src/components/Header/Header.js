@@ -10,7 +10,7 @@ function Header() {
   const userCookies = getCookiesInObjFormat();
   return (
     <header>
-      <Navbar bg="light">
+      <Navbar bg="primary" variant="dark">
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand>MyGamesList</Navbar.Brand>
