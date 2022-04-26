@@ -1,34 +1,11 @@
 # MyGamesList
 [mygameslist.net](#)<br/>
-Your own personal list of the games in your backlog.<br/>
-Wrote this because I have way too many games that I've been meaning to play but never actually do.<br/>
-Made with react, bootstrap, and mongodb
+This is my first full stack personal project where I try to create an app for users to manage their video game backlog. The idea for this project was inspired by MyAnimeList. The purpose of this project are as follows:
+
+- Put into practice the web technologies I've learnt but never used in a real project (i.e. React, Bootstrap, etc.)
+- Learn to implement common web functionality (i.e. Authentication, Session, etc.)
+- Learn to build reasonably decent looking UI
+- Understand how all the parts of web development fit together
 
 ## APIs used
-- [igdb](https://www.igdb.com/api) Used to query database of video games
-
-## Features
-- Is an SPA; doesn't hit a server on URL change. Uses react-router to handle URL change.
-- Uses React-Bootstrap for responsive desktop and mobile styling
-- Google account authorisation used alongside traditional signups (with some security precautions e.g. salt and pepper, hashing)
-
-## Core Features
-- ~~Basic Search by Title~~
-- From search page: add game (on hold by default, have option to change), remove game
-- User profile
-- Set up games status (on hold, playing, dropped, completed)
-- Access detailed game page
-
-## Extra Features
-- Icons for the game's platforms
-- Equal card length for search page
-- Option to view search result as lists
-- Search by category in games page
-- Advanced Search
-- Search sort options (newest, alphabetical, relevance)
-- Page system / Load more when user reaches bottom
-- Review system
-- If game card longer than 5 lines, do a ... click to expand
-
-## Side Note
-- Requires a cors proxy server to work. This is because cors origin header is (rightfully) disabled by the API provider.
+- [Giantbomb API](https://www.giantbomb.com/api/) Used to query database of video games
