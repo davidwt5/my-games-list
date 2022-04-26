@@ -1,5 +1,4 @@
 # MyGamesList
-[mygameslist.net](#)<br/>
 This is my first full stack personal project where I try to create an app for users to manage their video game backlog. The idea for this project was inspired by MyAnimeList. The purpose of this project are as follows:
 
 - Put into practice the web technologies I've learnt but never used in a real project (i.e. React, Bootstrap, etc.)
